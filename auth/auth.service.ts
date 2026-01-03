@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
-export class UsersService {
+export class AuthService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
@@ -37,3 +37,4 @@ export class UsersService {
     return this.usersRepository.findOne({ where: { id: userId } });
   }
 }
+
