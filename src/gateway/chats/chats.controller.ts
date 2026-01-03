@@ -1,12 +1,18 @@
 import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { ChatsService } from './chats.service';
+import { Chat } from './chat.entity';
+import { Message } from './message.entity';
 
 @Controller('chats')
 export class ChatsController {
   constructor(private readonly chatsService: ChatsService) {}
 
   @Post()
-  async createChat(@Body('type') type: string, @Body('title') title: string, @Body('members') members: number[]): Promise<Chat> {
+  async createChat(
+    @Body('type') type: string,
+    @Body('title') title: string,
+    @Body('members') members: number[],
+  ): Promise<Chat> {
     return this.chatsService.createChat(type, title, members);
   }
 
@@ -16,4 +22,7 @@ export class ChatsController {
     @Body('senderId') senderId: number,
     @Body('content') content: string,
   ): Promise<Message> {
-    return this.
+    return this.chatsService.sendMessage(chatId, senderId, content);
+  }
+}
+
