@@ -11,31 +11,34 @@ export class AuthService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async createUser(email: string, username: string, password: string) {
+  async createUser(email: string, username: string, password: string): Promise<User> {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = this.usersRepository.create({ email, username, password: hashedPassword });
     return this.usersRepository.save(user);
   }
 
-  async findByEmail(email: string) {
+  async findByEmail(email: string): Promise<User | undefined> {
     return this.usersRepository.findOne({ where: { email } });
   }
 
-  async findByUsername(username: string) {
+  async findByUsername(username: string): Promise<User | undefined> {
     return this.usersRepository.findOne({ where: { username } });
   }
 
-  async searchByUsername(query: string) {
+  async searchByUsername(query: string): Promise<User[]> {
     return this.usersRepository
       .createQueryBuilder('user')
       .where('user.username ILIKE :query', { query: `%${query}%` })
       .getMany();
   }
 
-  async updateUsername(userId: number, newUsername: string) {
+  async updateUsername(userId: number, newUsername: string): Promise<User | undefined> {
     await this.usersRepository.update({ id: userId }, { username: newUsername });
     return this.usersRepository.findOne({ where: { id: userId } });
   }
 }
+
+}
+
 
 
