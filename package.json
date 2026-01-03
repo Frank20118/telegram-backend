@@ -1,27 +1,20 @@
 {
   "name": "telegram-backend",
   "version": "1.0.0",
-  "description": "Telegram-like messenger backend",
-  "main": "dist/main.js",
+  "type": "module",
   "scripts": {
-    "start": "node dist/main.js",
-    "start:dev": "ts-node src/main.ts"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
-    "@nestjs/common": "^10.0.0",
-    "@nestjs/core": "^10.0.0",
-    "@nestjs/platform-express": "^10.0.0",
-    "@nestjs/typeorm": "^11.0.0",
-    "dotenv": "^16.4.0",
-    "pg": "^8.11.3",
-    "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1",
-    "typeorm": "^0.3.28"
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.1.1",
+    "mongoose": "^7.6.0"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6",
-    "@types/node": "^25.0.3",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "nodemon": "^3.0.2"
   }
 }
