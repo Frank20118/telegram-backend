@@ -14,8 +14,6 @@ export class User {
   @Column()
   password: string;
 
-  // Если поле может быть необязательным
-  @Column({ nullable: true })
-  name?: string;
+  @Column()
+  name: string;
 }
-
