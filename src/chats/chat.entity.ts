@@ -1,22 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
 import { User } from '../users/user.entity';
 import { Message } from './message.entity';
 
-@Entity()
 export class Chat {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  type: 'private' | 'group' | 'channel';
-
-  @Column({ nullable: true })
-  title: string;
-
-  @ManyToMany(() => User)
-  @JoinTable()
-  members: User[];
-
-  @OneToMany(() => Message, (message) => message.chat)
-  messages: Message[];
+  id!: number;
+  type!: 'private' | 'group' | 'channel';
+  title!: string;
+  members!: User[];
+  messages!: Message[];
 }
