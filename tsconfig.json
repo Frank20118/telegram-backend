@@ -2,14 +2,15 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2020",
+    "lib": ["es2020"],
     "outDir": "./dist",
     "rootDir": "./backend/src",
     "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "skipLibCheck": true
   },
   "include": ["backend/src/**/*"],
   "exclude": ["node_modules", "dist"]
