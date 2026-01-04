@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './users/user.entity';
+import { Chat } from './chats/chat.entity';
+import { Message } from './chats/message.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DATABASE_URL,
-      autoLoadEntities: true,
+      entities: [User, Chat, Message],
       synchronize: true,
-      ssl: { rejectUnauthorized: false },
     }),
   ],
 })
