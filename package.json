@@ -21,10 +21,8 @@
     "class-transformer": "^0.5.1"
   },
   "devDependencies": {
-    "@nestjs/cli": "^10.4.0",
     "@types/node": "^20.19.27",
-    "typescript": "^5.7.2",
-    "inquirer": "^8.2.0"
+    "typescript": "^5.7.2"
   },
   "engines": {
     "node": ">=18.0.0"
