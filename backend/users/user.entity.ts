@@ -1,19 +1,20 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
+import { Chat } from '../chats/chat.entity';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column({ unique: true })
-  username: string;
-
-  @Column({ unique: true })
-  email: string;
+  phone!: string;
 
   @Column()
-  password: string;
+  name!: string;
 
   @Column()
-  name: string;
+  password!: string;
+
+  @ManyToMany(() => Chat, chat => chat.members)
+  chats!: Chat[];
 }
