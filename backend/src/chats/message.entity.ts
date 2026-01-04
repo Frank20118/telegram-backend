@@ -1,31 +1,30 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { User } from '../users/user.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Chat } from './chat.entity';
+import { User } from '../users/user.entity';
 
 @Entity()
 export class Message {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
+
+  @Column()
+  content!: string;
 
   @Column({ nullable: true })
-  content: string;
+  mediaUrl!: string;
 
   @Column({ nullable: true })
-  mediaUrl: string;
+  mediaType!: string;
 
   @Column({ nullable: true })
-  mediaType: 'image' | 'video' | 'document' | 'sticker' | 'gif';
+  selfDestructTime!: number;
 
-  @Column({ nullable: true })
-  selfDestructTime: number; // сек
+  @ManyToOne(() => User)
+  sender!: User;
 
-  @ManyToOne(() => User, { eager: true })
-  @JoinColumn()
-  sender: User;
+  @ManyToOne(() => Chat, chat => chat.messages)
+  chat!: Chat;
 
-  @ManyToOne(() => Chat, (chat) => chat.messages)
-  chat: Chat;
-
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  @Column()
+  createdAt!: Date;
 }
