@@ -1,3 +1,4 @@
+import { Express } from 'express';
 import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -22,3 +23,4 @@ export class MediaController {
     return { filename: file.filename, path: file.path };
   }
 }
+
