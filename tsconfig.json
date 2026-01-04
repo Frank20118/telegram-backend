@@ -2,11 +2,11 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
+    "strict": true,
     "module": "commonjs",
-    "target": "ES2020",
-    "strict": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "target": "es2018",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["src/**/*"]
 }
