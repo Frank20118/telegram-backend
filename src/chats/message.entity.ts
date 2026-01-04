@@ -3,9 +3,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  CreateDateColumn
+  CreateDateColumn,
 } from 'typeorm';
-import { User } from '../users/user.entity';
+import { User } from '../../users/user.entity';
 import { Chat } from './chat.entity';
 
 @Entity()
@@ -16,12 +16,6 @@ export class Message {
   @Column()
   content!: string;
 
-  @Column({ nullable: true })
-  mediaUrl!: string;
-
-  @Column({ nullable: true })
-  mediaType!: string;
-
   @ManyToOne(() => User)
   sender!: User;
 
@@ -31,4 +25,3 @@ export class Message {
   @CreateDateColumn()
   createdAt!: Date;
 }
-
