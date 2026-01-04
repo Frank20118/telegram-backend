@@ -3,9 +3,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  CreateDateColumn,
+  CreateDateColumn
 } from 'typeorm';
-import { User } from '../../users/user.entity';
+import { User } from '../users/user.entity';
 import { Chat } from './chat.entity';
 
 @Entity()
@@ -16,7 +16,7 @@ export class Message {
   @Column()
   content!: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, user => user.messages)
   sender!: User;
 
   @ManyToOne(() => Chat, chat => chat.messages)
@@ -25,3 +25,4 @@ export class Message {
   @CreateDateColumn()
   createdAt!: Date;
 }
+
