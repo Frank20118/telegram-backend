@@ -1,16 +1,21 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2020",
-    "lib": ["es2020"],
-    "moduleResolution": "node",
-    "sourceMap": true,
+    "module": "CommonJS",
+    "target": "ES2021",
     "outDir": "./dist",
     "rootDir": "./src",
-    "strict": true,
+
+    "strict": false,
+    "strictPropertyInitialization": false,
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+
+    "types": ["node", "express"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
