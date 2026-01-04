@@ -1,28 +1,12 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
-import { ChatsService } from './chats.service';
-import { Chat } from './chat.entity';
-import { Message } from './message.entity';
+import { Controller, Get, Param } from '@nestjs/common';
+import { ChatsService } from '../../chats/chats.service';
 
-@Controller('chats')
-export class ChatsController {
+@Controller('gateway/chats')
+export class GatewayChatsController {
   constructor(private readonly chatsService: ChatsService) {}
 
-  @Post()
-  async createChat(
-    @Body('type') type: string,
-    @Body('title') title: string,
-    @Body('members') members: number[],
-  ): Promise<Chat> {
-    return this.chatsService.createChat(type, title, members);
-  }
-
-  @Post(':chatId/message')
-  async sendMessage(
-    @Param('chatId') chatId: number,
-    @Body('senderId') senderId: number,
-    @Body('content') content: string,
-  ): Promise<Message> {
-    return this.chatsService.sendMessage(chatId, senderId, content);
+  @Get('user/:userId')
+  getUserChats(@Param('userId') userId: string) {
+    return this.chatsService.getChatsByUserId(Number(userId));
   }
 }
-
