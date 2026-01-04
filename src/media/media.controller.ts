@@ -11,7 +11,7 @@ export class MediaController {
     FileInterceptor('file', {
       storage: diskStorage({
         destination: './uploads',
-        filename: (req: any, file: Express.Multer.File, cb: any) => {
+        filename: (req: any, file: any, cb: any) => {
           const uniqueSuffix = `${uuid()}${extname(file.originalname)}`;
           cb(null, uniqueSuffix);
         },
