@@ -1,23 +1,22 @@
-import { Express } from 'express';
 import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { v4 as uuid } from 'uuid';
 
+/// <reference types="multer" />
+import { Express } from 'express';
+
 @Controller('media')
 export class MediaController {
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file', {
-  storage: diskStorage({
-    destination: './uploads',
-    filename: (req, file, cb) => cb(null, `${uuid()}${extname(file.originalname)}`)
-  })
-}))
-uploadFile(@UploadedFile() file: Express.Multer.File) {
-  return { filename: file.filename, path: file.path };
-}
-
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, cb) => {
+          const uniqueSuffix = `${uuid()}${extname(file.originalname)}`;
+          cb(null, uniqueSuffix);
         },
       }),
     }),
@@ -26,5 +25,3 @@ uploadFile(@UploadedFile() file: Express.Multer.File) {
     return { filename: file.filename, path: file.path };
   }
 }
-
-
