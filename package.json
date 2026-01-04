@@ -15,8 +15,8 @@
     "@nestjs/cli": "^10.4.9",
     "@types/node": "^20.19.27",
     "typescript": "^5.7.2",
-    "inquirer": "8.2.6",      // ⚠ старая версия, работает с CommonJS
-    "wrap-ansi": "7.0.0"      // ⚠ старая версия, работает с require
+    "inquirer": "8.2.6",     
+    "wrap-ansi": "7.0.0"    
   },
   "scripts": {
     "build": "nest build",
