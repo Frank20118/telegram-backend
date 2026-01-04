@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "ES2020",
+    "target": "es2020",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./backend",      // <-- поменяли на backend
     "strict": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true
-  }
+  },
+ "rootDir": "./backend/src",
+"include": ["backend/src/**/*"]
+}
 }
