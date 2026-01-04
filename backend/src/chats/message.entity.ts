@@ -1,6 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { Chat } from './chat.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from 'typeorm';
 import { User } from '../users/user.entity';
+import { Chat } from './chat.entity';
 
 @Entity()
 export class Message {
@@ -11,20 +11,20 @@ export class Message {
   content!: string;
 
   @Column({ nullable: true })
-  mediaUrl!: string;
+  mediaUrl?: string;
 
   @Column({ nullable: true })
-  mediaType!: string;
+  mediaType?: 'image' | 'video' | 'document' | 'sticker' | 'gif';
 
   @Column({ nullable: true })
-  selfDestructTime!: number;
+  selfDestructTime?: number;
 
   @ManyToOne(() => User)
   sender!: User;
 
-  @ManyToOne(() => Chat, chat => chat.messages)
+  @ManyToOne(() => Chat, (chat) => chat.messages)
   chat!: Chat;
 
-  @Column()
+  @CreateDateColumn()
   createdAt!: Date;
 }
