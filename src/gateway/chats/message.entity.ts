@@ -5,18 +5,14 @@ import { Chat } from '../chats/chat.entity';
 @Entity()
 export class Message {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  content: string;
+  content!: string;
 
-  @ManyToOne(() => User, { eager: true })
-  @JoinColumn()
-  sender: User;
+  @ManyToOne(() => Chat, chat => chat.messages)
+  chat!: Chat;
 
-  @ManyToOne(() => Chat, (chat) => chat.messages)
-  chat: Chat;
-
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  @CreateDateColumn()
+  createdAt!: Date;
 }
