@@ -8,13 +8,16 @@ import { v4 as uuid } from 'uuid';
 @Controller('media')
 export class MediaController {
   @Post('upload')
-  @UseInterceptors(
-    FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: (req: any, file: any, cb: any) => {
-          const uniqueSuffix = `${uuid()}${extname(file.originalname)}`;
-          cb(null, uniqueSuffix);
+  @UseInterceptors(FileInterceptor('file', {
+  storage: diskStorage({
+    destination: './uploads',
+    filename: (req, file, cb) => cb(null, `${uuid()}${extname(file.originalname)}`)
+  })
+}))
+uploadFile(@UploadedFile() file: Express.Multer.File) {
+  return { filename: file.filename, path: file.path };
+}
+
         },
       }),
     }),
@@ -23,4 +26,5 @@ export class MediaController {
     return { filename: file.filename, path: file.path };
   }
 }
+
 
