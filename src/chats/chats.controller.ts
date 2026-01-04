@@ -6,7 +6,7 @@ export class ChatsController {
   constructor(private readonly chatsService: ChatsService) {}
 
   @Post()
-  async createChat(
+  async createChat(type: 'private' | 'group' | 'channel', title: string, memberIds: number[]): Promise<Chat> { ... }
     @Body('type') type: string,
     @Body('title') title: string,
     @Body('members') members: number[],
@@ -14,3 +14,4 @@ export class ChatsController {
     return this.chatsService.createChat(type, title, members);
   }
 }
+
