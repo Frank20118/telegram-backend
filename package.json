@@ -1,22 +1,30 @@
 {
+  "name": "telegram-backend",
+  "version": "1.0.0",
+  "description": "Backend for Telegram-like messenger",
+  "main": "dist/main.js",
+  "type": "module",
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@nestjs/common": "^10.2.0",
     "@nestjs/core": "^10.2.0",
     "@nestjs/platform-express": "^10.2.0",
-    "@nestjs/typeorm": "^10.2.0",
+    "@nestjs/typeorm": "^10.0.2",
     "typeorm": "^0.3.18",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "socket.io": "^4.8.3",
     "class-validator": "^0.14.3",
-    "class-transformer": "^0.5.1"
+    "class-transformer": "^0.5.1",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.4.9",
     "@types/node": "^20.19.27",
     "typescript": "^5.7.2",
-    "inquirer": "8.2.6",     
-    "wrap-ansi": "7.0.0"    
+    "inquirer": "^9.2.15"
   },
   "scripts": {
     "build": "nest build",
@@ -24,4 +32,3 @@
     "start:dev": "nest start --watch"
   }
 }
-
