@@ -1,35 +1,42 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToMany,
-  ManyToOne,
-  OneToMany,
-  JoinTable
-} from 'typeorm';
-import { User } from '../users/user.entity';
-import { Message } from './message.entity';
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+} from '@nestjs/common';
+import { ChatsService } from './chats.service';
 
-@Entity()
-export class Chat {
-  @PrimaryGeneratedColumn()
-  id!: number;
 
-  @Column()
-  type!: 'private' | 'group' | 'channel';
+export type ChatType = 'private' | 'group' | 'channel';
 
-  @Column()
-  title!: string;
+@Controller('chats')
+export class ChatsController {
+  constructor(private readonly chatsService: ChatsService) {}
 
-  @ManyToOne(() => User, user => user.chats)
-  owner!: User;
+  @Post()
+  async createChat(
+    @Body('type') type: string,
+    @Body('title') title: string,
+  ) {
+    
+    const chatType = type as ChatType;
 
-  @ManyToMany(() => User)
-  @JoinTable()
-  members!: User[];
+    return this.chatsService.createChat(chatType, title);
+  }
 
-  @OneToMany(() => Message, message => message.chat)
-  messages!: Message[];
+  @Get(':id')
+  async getChat(@Param('id') id: string) {
+    
+    return this.chatsService.getChatById(id);
+  }
+
+  @Get('user/:userId')
+  async getUserChats(@Param('userId') userId: string) {
+    
+    return this.chatsService.getChatsByUserId(userId.toString());
+  }
 }
+
 
 
