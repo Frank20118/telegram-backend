@@ -3,12 +3,14 @@
     "module": "commonjs",
     "target": "es2020",
     "outDir": "./dist",
-    "rootDir": "./backend",      // <-- поменяли на backend
+    "rootDir": "./backend/src",
     "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
- "rootDir": "./backend/src",
-"include": ["backend/src/**/*"]
-}
+  "include": ["backend/src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
