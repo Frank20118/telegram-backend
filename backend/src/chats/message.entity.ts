@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { User } from '../users/user.entity';
 import { Chat } from './chat.entity';
 
@@ -11,13 +11,13 @@ export class Message {
   content!: string;
 
   @Column({ nullable: true })
-  mediaUrl?: string;
+  mediaUrl!: string;
 
   @Column({ nullable: true })
-  mediaType?: 'image' | 'video' | 'document' | 'sticker' | 'gif';
+  mediaType!: string;
 
   @Column({ nullable: true })
-  selfDestructTime?: number;
+  selfDestructTime!: number;
 
   @ManyToOne(() => User)
   sender!: User;
@@ -25,6 +25,6 @@ export class Message {
   @ManyToOne(() => Chat, (chat) => chat.messages)
   chat!: Chat;
 
-  @CreateDateColumn()
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt!: Date;
 }
