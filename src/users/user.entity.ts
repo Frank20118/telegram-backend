@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
-import { Chat } from '../gateway/chats/chat.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Chat } from '../chats/chat.entity';
+import { Message } from '../chats/message.entity';
 
 @Entity()
 export class User {
@@ -15,6 +16,9 @@ export class User {
   @Column()
   password!: string;
 
-  @ManyToMany(() => Chat, chat => chat.members)
+  @OneToMany(() => Chat, chat => chat.owner)
   chats!: Chat[];
+
+  @OneToMany(() => Message, message => message.sender)
+  messages!: Message[];
 }
