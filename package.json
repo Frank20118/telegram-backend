@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
 
-  "scripts": {
-    "build": "tsc",
-    "start": "node dist/main.js"
-  },
+"scripts": {
+  "build": "npx tsc",
+  "start": "node dist/main.js"
+}
 
   "dependencies": {
     "@nestjs/common": "^10.2.0",
