@@ -1,6 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Message } from './message.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany } from 'typeorm';
 import { User } from '../users/user.entity';
+import { Message } from './message.entity';
 
 @Entity()
 export class Chat {
@@ -13,9 +13,10 @@ export class Chat {
   @Column()
   title!: string;
 
-  @OneToMany(() => Message, message => message.chat)
-  messages!: Message[];
+  @ManyToMany(() => User)
+  @JoinTable()
+  members!: User[];
 
-  @Column('simple-array')
-  members!: number[];
+  @OneToMany(() => Message, (message) => message.chat)
+  messages!: Message[];
 }
