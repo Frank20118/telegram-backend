@@ -10,3 +10,10 @@
   },
   "include": ["src/**/*"]
 }
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  }
+}
+
