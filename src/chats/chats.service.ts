@@ -1,27 +1,39 @@
 import { Injectable } from '@nestjs/common';
-import { Chat } from './chat.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Chat } from '../gateway/chats/chat.entity';
+import { User } from '../users/user.entity';
 
 @Injectable()
 export class ChatsService {
-  private chats: Chat[] = [];
+  constructor(
+    @InjectRepository(Chat)
+    private chatRepo: Repository<Chat>,
+
+    @InjectRepository(User)
+    private userRepo: Repository<User>,
+  ) {}
 
   async createChat(
     type: 'private' | 'group' | 'channel',
     title: string,
-    members: number[]
+    memberIds: number[],
   ): Promise<Chat> {
-    const chat: Chat = {
-      id: Date.now(),
+    const members = await this.userRepo.findByIds(memberIds);
+
+    const chat = this.chatRepo.create({
       type,
       title,
       members,
-      messages: []
-    };
-    this.chats.push(chat);
-    return chat;
+    });
+
+    return this.chatRepo.save(chat);
   }
 
   async getChatById(id: number): Promise<Chat | null> {
-    return this.chats.find(c => c.id === Number(id)) ?? null;
+    return this.chatRepo.findOne({
+      where: { id },
+      relations: ['members', 'messages'],
+    });
   }
 }
