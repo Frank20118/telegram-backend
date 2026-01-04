@@ -1,9 +1,11 @@
 import { WebSocketGateway, WebSocketServer, SubscribeMessage, OnGatewayConnection, OnGatewayDisconnect } from "@nestjs/websockets";
 import { Server, Socket } from "socket.io";
 
-@WebSocketGateway({ cors: true })
-export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
-  @WebSocketServer() server: Server;
+@WebSocketGateway()
+export class ChatGateway {
+  @WebSocketServer()
+  server!: Server;
+}
 
   handleConnection(client: Socket) { console.log(`Client connected: ${client.id}`); }
   handleDisconnect(client: Socket) { console.log(`Client disconnected: ${client.id}`); }
@@ -18,3 +20,4 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     client.broadcast.emit(`chat:${payload.chatId}:message:new`, payload);
   }
 }
+
