@@ -3,26 +3,25 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  CreateDateColumn
+  CreateDateColumn,
 } from 'typeorm';
-import { User } from '../users/user.entity';
 import { Chat } from './chat.entity';
+import { User } from '../users/user.entity';
 
 @Entity()
 export class Message {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column()
-  content!: string;
-
-  @ManyToOne(() => User, user => user.messages)
-  sender!: User;
+  content: string;
 
   @ManyToOne(() => Chat, chat => chat.messages)
-  chat!: Chat;
+  chat: Chat;
+
+  @ManyToOne(() => User, user => user.messages)
+  sender: User;
 
   @CreateDateColumn()
-  createdAt!: Date;
+  createdAt: Date;
 }
-
