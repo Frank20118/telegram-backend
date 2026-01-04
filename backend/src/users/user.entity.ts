@@ -5,7 +5,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ unique: true })
+  @Column()
   phone!: string;
 
   @Column()
@@ -14,3 +14,4 @@ export class User {
   @Column()
   password!: string;
 }
+
